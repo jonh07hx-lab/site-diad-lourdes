@@ -1,0 +1,380 @@
+/* =========================================================
+   style.css — Site do curso de Desenvolvimento de Sistemas
+   Cada bloco abaixo é marcado com um comentário.
+   ========================================================= */
+
+/* ---------- 1. VARIÁVEIS (paleta tirada das logos) ----------
+   Mude uma cor aqui e o site inteiro muda! */
+:root {
+  --verde-900: #0a4d22;   /* verde bem escuro (textos, fundos escuros) */
+  --verde-700: #0f6b2e;   /* verde "PIAUÍ" da logo da SEDUC */
+  --verde-600: #17803a;   /* verde principal */
+  --verde-500: #2e9b3f;   /* verde das listras da logo */
+  --verde-300: #8bcb6a;   /* verde claro (detalhes) */
+  --verde-100: #e6f4e4;   /* verde quase branco (fundos) */
+  --branco: #ffffff;
+  --vermelho: #e5452b;    /* detalhe: listra vermelha */
+  --amarelo: #f9b812;     /* detalhe: listra amarela */
+  --azul: #1f4e9c;        /* detalhe: listra azul */
+  --azul-escola: #1c6fd6; /* azul da logo da escola */
+  --texto: #12261a;
+  --texto-suave: #4a5d50;
+  --raio: 22px;
+  --sombra: 0 10px 30px rgba(15, 107, 46, 0.12);
+  --sombra-forte: 0 18px 45px rgba(15, 107, 46, 0.22);
+  --grad-verde: linear-gradient(135deg, var(--verde-700), var(--verde-500));
+  --fonte-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+/* ---------- 2. BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; font-size: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--branco);
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3 { line-height: 1.15; margin: 0 0 .5em; }
+p { margin: 0 0 1em; }
+a { color: var(--verde-700); }
+code, pre { font-family: var(--fonte-mono); }
+
+/* foco visível para quem usa teclado */
+:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; border-radius: 6px; }
+.escuro :focus-visible, .vsc :focus-visible { outline-color: var(--amarelo); }
+
+/* texto só para leitores de tela */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- 3. LAYOUT GERAL ---------- */
+.container { width: min(1100px, 100% - 2.5rem); margin-inline: auto; }
+.secao { padding-block: clamp(4.5rem, 10vw, 8rem); }
+.secao.alt { background: var(--verde-100); }
+.eyebrow {
+  display: inline-block; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  font-size: .85rem; color: var(--verde-600); margin-bottom: .75rem;
+}
+.secao h2 { font-size: clamp(2.1rem, 5.5vw, 3.6rem); letter-spacing: -.02em; }
+.lead { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--texto-suave); max-width: 46ch; margin-bottom: 2.5rem; }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem; cursor: pointer;
+  font: inherit; font-weight: 700; border: 0; border-radius: 999px;
+  padding: .85rem 1.6rem; text-decoration: none;
+  background: var(--grad-verde); color: var(--branco);
+  box-shadow: var(--sombra); transition: transform .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--sombra-forte); }
+.btn-claro { background: var(--branco); color: var(--verde-700); }
+.btn-contorno { background: transparent; color: var(--verde-700); box-shadow: inset 0 0 0 2px var(--verde-600); }
+.btn-pequeno { padding: .5rem 1.1rem; font-size: .95rem; }
+
+/* ---------- 4. BARRA DE PROGRESSO + MENU FIXO ---------- */
+.progresso {
+  position: fixed; inset: 0 0 auto 0; height: 5px; z-index: 100;
+  background: linear-gradient(90deg, var(--verde-500), var(--amarelo), var(--vermelho));
+  transform-origin: left; transform: scaleX(var(--p, 0));
+}
+.topo {
+  position: fixed; top: 5px; left: 0; right: 0; z-index: 90;
+  background: rgba(255, 255, 255, .88); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15, 107, 46, .12);
+}
+.topo-in { display: flex; align-items: center; gap: 1rem; padding-block: .5rem; }
+.marca { font-weight: 800; color: var(--verde-700); white-space: nowrap; }
+.menu { display: flex; gap: .25rem; overflow-x: auto; flex: 1; scrollbar-width: none; }
+.menu a {
+  padding: .4rem .8rem; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  color: var(--texto-suave); font-weight: 600; font-size: .95rem; transition: background .2s, color .2s;
+}
+.menu a:hover { background: var(--verde-100); }
+.menu a.ativo { background: var(--verde-600); color: var(--branco); }
+
+/* ---------- 5. REVEAL AO ROLAR ---------- */
+.js .reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.js .reveal.visivel { opacity: 1; transform: none; }
+
+/* ---------- 6. HERO ---------- */
+.hero {
+  position: relative; overflow: hidden; min-height: 100vh;
+  display: grid; align-items: center; text-align: center;
+  padding: 7rem 0 5rem; color: var(--branco);
+  background: radial-gradient(circle at 20% 10%, var(--verde-500), transparent 55%),
+              linear-gradient(160deg, var(--verde-900), var(--verde-700));
+}
+.hero-conteudo { position: relative; z-index: 2; }
+.logos { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.logo-badge {
+  background: var(--branco); border-radius: 24px; padding: .6rem 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .25); display: grid; place-items: center;
+}
+.logo-badge img { height: 96px; width: auto; object-fit: contain; }
+.hero .eyebrow { color: var(--verde-300); }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 5.5rem); letter-spacing: -.03em; }
+.hero-digita { font-size: clamp(1.4rem, 3.5vw, 2.3rem); font-weight: 700; min-height: 1.4em; }
+.hero-digita #digitando { color: var(--amarelo); }
+.cursor { display: inline-block; width: .1em; height: 1em; background: var(--amarelo); margin-left: 4px; vertical-align: -.1em; animation: piscar 1s steps(1) infinite; }
+.hero-frase { font-size: clamp(1.1rem, 2.2vw, 1.5rem); max-width: 40ch; margin: 1rem auto 2.2rem; opacity: .95; }
+.seta-rolar { display: inline-block; animation: descer 1.6s ease-in-out infinite; }
+
+/* formas flutuantes de fundo */
+.formas { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.forma { position: absolute; opacity: .22; animation: flutuar var(--dur-forma, 12s) ease-in-out infinite; }
+.f1 { width: 140px; height: 140px; border-radius: 50%; background: var(--amarelo); top: 12%; left: 8%; }
+.f2 { width: 90px; height: 90px; border-radius: 22px; background: var(--branco); top: 22%; right: 10%; --dur-forma: 15s; transform: rotate(20deg); }
+.f3 { width: 200px; height: 200px; border-radius: 50%; background: var(--verde-300); bottom: 8%; left: 18%; --dur-forma: 18s; }
+.f4 { width: 70px; height: 70px; background: var(--vermelho); border-radius: 18px; bottom: 20%; right: 16%; --dur-forma: 10s; }
+.f5 { width: 110px; height: 110px; border-radius: 50%; border: 12px solid var(--azul-escola); bottom: 40%; right: 4%; --dur-forma: 14s; }
+
+/* ---------- 7. CARTÕES DO CURSO ---------- */
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.cartao {
+  background: var(--branco); border-radius: var(--raio); padding: 1.8rem;
+  box-shadow: var(--sombra); border-top: 5px solid var(--verde-500);
+  transition: transform .25s, box-shadow .25s;
+}
+.cartao:hover { transform: translateY(-6px); box-shadow: var(--sombra-forte); }
+.cartao .emoji { font-size: 2.4rem; display: block; margin-bottom: .6rem; }
+.cartao h3 { font-size: 1.35rem; color: var(--verde-700); }
+.cartao p { margin: 0; color: var(--texto-suave); }
+.cartao:nth-child(4n+2) { border-top-color: var(--amarelo); }
+.cartao:nth-child(4n+3) { border-top-color: var(--azul); }
+.cartao:nth-child(4n+4) { border-top-color: var(--vermelho); }
+
+/* contadores */
+.contadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+.contador { background: var(--grad-verde); color: var(--branco); border-radius: var(--raio); padding: 1.8rem; text-align: center; box-shadow: var(--sombra); }
+.contador strong { display: block; font-size: clamp(3rem, 7vw, 4.5rem); line-height: 1; }
+.contador span { font-weight: 600; opacity: .95; }
+
+/* ---------- 8. LINGUAGENS: CARTÕES 3D QUE VIRAM ---------- */
+.grade-lang { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
+.flip { perspective: 1100px; height: 330px; cursor: pointer; }
+.flip-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform .7s cubic-bezier(.4, .2, .2, 1); transform-style: preserve-3d;
+}
+.flip.virado .flip-inner { transform: rotateY(180deg); }
+.flip-frente, .flip-verso {
+  position: absolute; inset: 0; border-radius: var(--raio); padding: 1.4rem;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  box-shadow: var(--sombra); overflow: hidden;
+}
+.flip-frente { background: var(--branco); display: grid; place-content: center; text-align: center; justify-items: center; gap: .3rem; }
+.flip-frente h3 { font-size: 1.6rem; margin: .4rem 0 0; color: var(--verde-700); }
+.flip-frente p { margin: 0; color: var(--texto-suave); }
+.ico { width: 84px; height: 84px; }
+.dica-toque { margin-top: .8rem; font-size: .85rem; color: var(--verde-600); font-weight: 700; }
+.flip-verso { background: var(--grad-verde); color: var(--branco); transform: rotateY(180deg); display: flex; flex-direction: column; gap: .4rem; }
+.flip-verso h3 { font-size: 1.1rem; color: var(--amarelo); margin: 0; }
+.flip-verso p { font-size: .95rem; margin: 0; line-height: 1.4; }
+.flip-verso pre { margin: .3rem 0 0; flex: 1; overflow: auto; background: #0d1f14; border-radius: 12px; padding: .7rem; font-size: .78rem; line-height: 1.45; color: #e6f4e4; }
+
+/* ---------- 9. LABORATÓRIO AO VIVO ---------- */
+.lab-barra { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; align-items: center; }
+.lab-barra .rotulo { font-weight: 700; color: var(--texto-suave); }
+.lab { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.lab-editores { display: grid; gap: .8rem; }
+.lab-editor label { display: block; font-weight: 700; font-size: .85rem; margin-bottom: .25rem; color: var(--verde-700); }
+.lab textarea {
+  width: 100%; height: 120px; resize: vertical; border: 2px solid var(--verde-100); border-radius: 14px;
+  padding: .8rem; font-family: var(--fonte-mono); font-size: .9rem; line-height: 1.5;
+  background: #0d1f14; color: #e6f4e4; tab-size: 2;
+}
+.lab-previa { background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra); overflow: hidden; display: flex; flex-direction: column; min-height: 420px; }
+.lab-previa .titulo-previa { background: var(--verde-100); padding: .6rem 1rem; font-weight: 700; font-size: .85rem; color: var(--verde-700); }
+.lab-previa iframe { border: 0; flex: 1; width: 100%; background: var(--branco); }
+
+/* ---------- 10. VS CODE SIMULADO ---------- */
+.vsc-layout { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1.2rem; align-items: start; }
+.vsc { background: #1e1e1e; color: #d4d4d4; border-radius: 16px; overflow: hidden; box-shadow: var(--sombra-forte); font-size: .9rem; }
+.vsc-titulo { background: #323233; padding: .5rem .9rem; display: flex; gap: .45rem; align-items: center; font-size: .8rem; color: #ccc; }
+.vsc-titulo i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.vsc-titulo i:nth-child(1) { background: #ff5f56; } .vsc-titulo i:nth-child(2) { background: #ffbd2e; } .vsc-titulo i:nth-child(3) { background: #27c93f; }
+.vsc-titulo span { margin-left: .6rem; }
+.vsc-corpo { display: grid; grid-template-columns: 190px 1fr; min-height: 300px; }
+.explorer { background: #252526; padding: .6rem 0; font-size: .85rem; border-right: 1px solid #111; }
+.explorer h4 { margin: 0 0 .4rem; padding: 0 .9rem; font-size: .7rem; letter-spacing: .1em; color: #bbb; text-transform: uppercase; }
+.explorer ul { list-style: none; margin: 0; padding: 0; }
+.explorer .filho { padding-left: 1.2rem; }
+.arq {
+  display: block; width: 100%; text-align: left; background: none; border: 0; color: #ccc;
+  font: inherit; padding: .22rem .9rem; cursor: pointer;
+}
+.arq:hover { background: #2a2d2e; }
+.arq.ativo { background: #37373d; color: #fff; }
+.pasta { color: #ddd; }
+.editor-area { display: flex; flex-direction: column; min-width: 0; }
+.abas { display: flex; background: #252526; overflow-x: auto; min-height: 36px; }
+.aba { background: #2d2d2d; color: #aaa; border: 0; border-right: 1px solid #1e1e1e; padding: .5rem .9rem; font: inherit; font-size: .82rem; cursor: pointer; white-space: nowrap; }
+.aba.ativo { background: #1e1e1e; color: #fff; box-shadow: inset 0 2px 0 var(--verde-500); }
+.aba.sujo::after { content: " ●"; color: var(--amarelo); }
+.editor {
+  margin: 0; padding: 1rem; flex: 1; min-height: 240px; overflow: auto; white-space: pre; tab-size: 2;
+  font-size: .88rem; line-height: 1.6; outline-offset: -3px;
+}
+.vsc-barra { background: var(--verde-700); color: #fff; padding: .55rem .8rem; display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.vsc-barra button { font-size: .8rem; }
+.terminal { background: #181818; border-top: 1px solid #333; padding: .6rem .9rem; font-family: var(--fonte-mono); font-size: .82rem; min-height: 130px; color: #cfd; white-space: pre-wrap; }
+.terminal .t-cmd { color: #8bcb6a; }
+.terminal .t-cursor { display: inline-block; width: .55em; height: 1em; background: #ddd; vertical-align: -.15em; animation: piscar 1s steps(1) infinite; }
+
+/* cores da sintaxe (feita à mão no script.js) */
+.tk-comment { color: #6a9955; font-style: italic; }
+.tk-tag { color: #569cd6; }
+.tk-attr { color: #9cdcfe; }
+.tk-string { color: #ce9178; }
+.tk-bracket { color: #808080; }
+.tk-keyword { color: #c586c0; }
+.tk-number { color: #b5cea8; }
+.tk-func { color: #dcdcaa; }
+.tk-selector { color: #d7ba7d; }
+.tk-prop { color: #9cdcfe; }
+.tk-value { color: #b5cea8; }
+
+.previa-vsc { background: var(--branco); border-radius: 16px; box-shadow: var(--sombra); overflow: hidden; }
+.previa-vsc .titulo-previa { background: var(--verde-100); padding: .6rem 1rem; font-weight: 700; font-size: .85rem; color: var(--verde-700); }
+.previa-vsc iframe { border: 0; width: 100%; height: 260px; display: block; }
+.previa-vsc p { padding: .8rem 1rem; margin: 0; font-size: .9rem; color: var(--texto-suave); }
+
+.extensoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.extensao { background: var(--branco); border-radius: 16px; padding: 1.1rem; box-shadow: var(--sombra); display: flex; gap: .8rem; }
+.extensao .emoji { font-size: 1.8rem; }
+.extensao h3 { font-size: 1.05rem; margin: 0 0 .2rem; color: var(--verde-700); }
+.extensao p { margin: 0; font-size: .92rem; color: var(--texto-suave); }
+
+.legenda { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: 1.5rem; font-weight: 700; }
+.legenda span.chip { background: var(--verde-600); color: #fff; padding: .45rem 1rem; border-radius: 999px; }
+.legenda span.chip:nth-child(3) { background: var(--azul); }
+.legenda span.chip:nth-child(5) { background: var(--texto); }
+.legenda span.chip:nth-child(7) { background: var(--vermelho); }
+.legenda .seta { color: var(--verde-600); }
+
+/* ---------- 11. QUIZ ---------- */
+.quiz { background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra); padding: clamp(1.4rem, 4vw, 2.6rem); max-width: 760px; }
+.quiz-topo { display: flex; justify-content: space-between; font-weight: 700; color: var(--texto-suave); margin-bottom: 1rem; }
+.quiz-barra { height: 8px; background: var(--verde-100); border-radius: 99px; overflow: hidden; margin-bottom: 1.5rem; }
+.quiz-barra div { height: 100%; width: 0; background: var(--grad-verde); transition: width .5s; }
+.quiz h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+.opcoes { display: grid; gap: .7rem; margin-top: 1.2rem; }
+.opcao {
+  text-align: left; font: inherit; font-weight: 600; padding: .9rem 1.2rem; border-radius: 14px; cursor: pointer;
+  background: var(--branco); border: 2px solid var(--verde-100); color: var(--texto); transition: border-color .2s, transform .2s;
+}
+.opcao:hover:not(:disabled) { border-color: var(--verde-500); transform: translateX(4px); }
+.opcao.certa { background: var(--verde-100); border-color: var(--verde-500); animation: pop .5s; }
+.opcao.errada { background: #fdecea; border-color: var(--vermelho); animation: tremer .45s; }
+.feedback { min-height: 2.6em; margin-top: 1rem; font-weight: 700; }
+.feedback.ok { color: var(--verde-700); } .feedback.erro { color: var(--vermelho); }
+.quiz-fim { text-align: center; }
+.quiz-fim .nota { font-size: 4rem; font-weight: 800; color: var(--verde-600); }
+
+/* ---------- 12. COMO FOI FEITO: ABAS ---------- */
+.abas-site { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.aba-site {
+  font: inherit; font-weight: 700; cursor: pointer; padding: .7rem 1.3rem; border-radius: 999px;
+  background: var(--branco); color: var(--verde-700); border: 2px solid var(--verde-500); transition: background .2s, color .2s;
+}
+.aba-site[aria-selected="true"] { background: var(--verde-600); color: var(--branco); }
+.painel { background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra); padding: clamp(1.4rem, 4vw, 2.4rem); }
+.painel[hidden] { display: none; }
+.painel h3 { font-size: 1.7rem; color: var(--verde-700); }
+.analogia { background: var(--verde-100); border-left: 6px solid var(--amarelo); border-radius: 12px; padding: 1rem 1.2rem; font-size: 1.1rem; margin-bottom: 1.2rem; }
+.painel pre {
+  background: #0d1f14; color: #e6f4e4; border-radius: 14px; padding: 1rem; overflow: auto;
+  font-size: .85rem; line-height: 1.55; max-height: 320px; margin: 0 0 1rem;
+}
+.demo-linha { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center; }
+
+/* demo de @keyframes (o mesmo código aparece no painel CSS) */
+.palco { height: 120px; flex: 1; min-width: 200px; background: var(--verde-100); border-radius: 14px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px; }
+@keyframes pular {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-60px); }
+}
+.bolinha { width: 40px; height: 40px; border-radius: 50%; background: var(--vermelho); animation: pular var(--dur, 1s) ease-in-out infinite; }
+.demo-controle label { font-weight: 700; display: block; }
+.demo-controle input { width: 200px; }
+.numero-demo { font-size: 3.5rem; font-weight: 800; color: var(--verde-600); min-width: 3ch; }
+
+/* fluxo "No ar" animado */
+.fluxo { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .6rem; margin: 1.2rem 0; }
+.passo { background: var(--verde-100); border: 3px solid transparent; border-radius: 18px; padding: 1rem 1.3rem; text-align: center; font-weight: 700; min-width: 130px; }
+.passo .emoji { display: block; font-size: 2rem; }
+.fluxo-seta { font-size: 1.8rem; color: var(--verde-600); }
+.fluxo.rodando .passo { animation: acender .8s forwards; animation-delay: calc(var(--i) * 1s); }
+.fluxo.rodando .fluxo-seta { animation: acender-seta .5s forwards; animation-delay: calc(var(--i) * 1s - .4s); opacity: .25; }
+
+/* ---------- 13. PROJETOS ---------- */
+.projeto { overflow: hidden; padding: 0; border-top: 0; }
+.projeto .capa { height: 140px; background: var(--grad-verde); display: grid; place-items: center; font-size: 3rem; }
+.projeto:nth-child(2) .capa { background: linear-gradient(135deg, var(--azul), var(--azul-escola)); }
+.projeto:nth-child(3) .capa { background: linear-gradient(135deg, #d99a00, var(--amarelo)); }
+.projeto .corpo { padding: 1.4rem; }
+.projeto [contenteditable]:hover, .projeto [contenteditable]:focus { background: var(--verde-100); border-radius: 6px; }
+.nota-edit { color: var(--texto-suave); font-size: .9rem; margin-top: 1rem; }
+
+/* ---------- 14. RODAPÉ ---------- */
+.rodape {
+  background: linear-gradient(160deg, var(--verde-900), var(--verde-700)); color: var(--branco);
+  text-align: center; padding: clamp(4rem, 9vw, 7rem) 0 3rem;
+}
+.rodape h2 { font-size: clamp(2.2rem, 6vw, 4rem); }
+.rodape p { max-width: 48ch; margin-inline: auto; }
+.rodape .logos { margin: 2.5rem 0 1rem; }
+.rodape small { opacity: .8; }
+
+/* ---------- 15. MODO APRESENTAÇÃO ---------- */
+.indicador {
+  position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 110; display: none;
+  background: var(--verde-900); color: var(--branco); font-weight: 800; font-size: 1.4rem;
+  padding: .5rem 1.2rem; border-radius: 999px; box-shadow: var(--sombra-forte);
+}
+html.apresentacao { font-size: 125%; }
+html.apresentacao .indicador { display: block; }
+html.apresentacao .extra { display: none !important; }
+html.apresentacao [data-secao] { min-height: 100vh; display: grid; align-content: center; }
+html.apresentacao .btn-ap { background: var(--amarelo); color: var(--texto); }
+
+/* ---------- 16. ANIMAÇÕES (@keyframes) ---------- */
+@keyframes piscar { 50% { opacity: 0; } }
+@keyframes descer { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@keyframes flutuar {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(24px, -40px) rotate(12deg); }
+}
+@keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes tremer { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+@keyframes acender { to { background: var(--verde-600); color: var(--branco); border-color: var(--amarelo); transform: scale(1.06); } }
+@keyframes acender-seta { to { opacity: 1; transform: scale(1.3); } }
+
+/* ---------- 17. RESPONSIVO ---------- */
+@media (max-width: 860px) {
+  .lab, .vsc-layout { grid-template-columns: 1fr; }
+  .vsc-corpo { grid-template-columns: 1fr; }
+  .explorer { border-right: 0; border-bottom: 1px solid #111; }
+  .marca { display: none; }
+  .logo-badge img { height: 72px; }
+}
+
+/* ---------- 18. RESPEITA QUEM PREFERE MENOS MOVIMENTO ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+  .forma { display: none; }
+}
