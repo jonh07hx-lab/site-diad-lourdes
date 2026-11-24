@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-24T12:32:57.588Z",
+        "reason": "assistant: section.secao only has vertical padding; text is inset by .container (width calc), no visible boundary"
+      }
+    ]
+  }
+}

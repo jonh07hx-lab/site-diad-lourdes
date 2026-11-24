@@ -183,7 +183,7 @@ const EXEMPLOS = {
   botao: {
     html: '<button id="b">Clique em mim</button>',
     css: "button {\n  font-size: 1.4rem;\n  padding: .8rem 1.6rem;\n  border: 0;\n  border-radius: 12px;\n  background: #17803a;\n  color: white;\n  cursor: pointer;\n}",
-    js: "const b = document.getElementById('b');\nconst cores = ['#17803a', '#1f4e9c', '#e5452b', '#f9b812'];\nlet i = 0;\nb.addEventListener('click', () => {\n  i = (i + 1) % cores.length;\n  b.style.background = cores[i];\n});",
+    js: "const b = document.getElementById('b');\nconst cores = ['#17803a', '#1f4e9c', '#cf3a22', '#f9b812'];\nlet i = 0;\nb.addEventListener('click', () => {\n  i = (i + 1) % cores.length;\n  b.style.background = cores[i];\n});",
   },
   contador: {
     html: '<h1 id="n">0</h1>\n<button id="mais">+1</button>',
@@ -220,7 +220,7 @@ carregarExemplo("botao");
 const ARQUIVOS = {
   "index.html": { lang: "html", code: '<!DOCTYPE html>\n<html lang="pt-BR">\n<head>\n  <meta charset="UTF-8">\n  <title>Meu site</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1 id="titulo">Olá, mundo!</h1>\n  <button id="botao">Mudar cor</button>\n  <script src="script.js"><\/script>\n</body>\n</html>' },
   "style.css": { lang: "css", code: ":root {\n  --cor: #17803a;\n}\nbody {\n  font-family: system-ui;\n  text-align: center;\n  padding: 2rem;\n}\nh1 {\n  color: var(--cor);\n}\nbutton {\n  padding: 10px 18px;\n  border: 0;\n  border-radius: 10px;\n  background: var(--cor);\n  color: white;\n  cursor: pointer;\n}" },
-  "script.js": { lang: "js", code: '// Troca a cor do título ao clicar\nconst titulo = document.getElementById("titulo");\nconst botao = document.getElementById("botao");\nbotao.addEventListener("click", () => {\n  titulo.style.color = "#e5452b";\n});' },
+  "script.js": { lang: "js", code: '// Troca a cor do título ao clicar\nconst titulo = document.getElementById("titulo");\nconst botao = document.getElementById("botao");\nbotao.addEventListener("click", () => {\n  titulo.style.color = "#cf3a22";\n});' },
   "README.md": { lang: "md", code: "# Meu site\n\nProjeto do curso de Desenvolvimento de Sistemas.\nAbra o index.html no navegador." },
   ".gitignore": { lang: "gitignore", code: "node_modules/\n.env\n.DS_Store" },
 };

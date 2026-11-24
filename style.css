@@ -13,7 +13,7 @@
   --verde-300: #8bcb6a;   /* verde claro (detalhes) */
   --verde-100: #e6f4e4;   /* verde quase branco (fundos) */
   --branco: #ffffff;
-  --vermelho: #e5452b;    /* detalhe: listra vermelha */
+  --vermelho: #cf3a22;    /* detalhe: listra vermelha */
   --amarelo: #f9b812;     /* detalhe: listra amarela */
   --azul: #1f4e9c;        /* detalhe: listra azul */
   --azul-escola: #1c6fd6; /* azul da logo da escola */
@@ -111,7 +111,7 @@ code, pre { font-family: var(--fonte-mono); }
   position: relative; overflow: hidden; min-height: 100vh;
   display: grid; align-items: center; text-align: center;
   padding: 7rem 0 5rem; color: var(--branco);
-  background: radial-gradient(circle at 20% 10%, var(--verde-500), transparent 55%),
+  background:
               linear-gradient(160deg, var(--verde-900), var(--verde-700));
 }
 .hero-conteudo { position: relative; z-index: 2; }
@@ -142,16 +142,13 @@ code, pre { font-family: var(--fonte-mono); }
 .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
 .cartao {
   background: var(--branco); border-radius: var(--raio); padding: 1.8rem;
-  box-shadow: var(--sombra); border-top: 5px solid var(--verde-500);
+  box-shadow: var(--sombra);
   transition: transform .25s, box-shadow .25s;
 }
 .cartao:hover { transform: translateY(-6px); box-shadow: var(--sombra-forte); }
-.cartao .emoji { font-size: 2.4rem; display: block; margin-bottom: .6rem; }
+.cartao .emoji { font-size: 2.2rem; display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%; background: var(--verde-100); margin-bottom: .8rem; }
 .cartao h3 { font-size: 1.35rem; color: var(--verde-700); }
 .cartao p { margin: 0; color: var(--texto-suave); }
-.cartao:nth-child(4n+2) { border-top-color: var(--amarelo); }
-.cartao:nth-child(4n+3) { border-top-color: var(--azul); }
-.cartao:nth-child(4n+4) { border-top-color: var(--vermelho); }
 
 /* contadores */
 .contadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
@@ -206,7 +203,7 @@ code, pre { font-family: var(--fonte-mono); }
 .vsc-titulo span { margin-left: .6rem; }
 .vsc-corpo { display: grid; grid-template-columns: 190px 1fr; min-height: 300px; }
 .explorer { background: #252526; padding: .6rem 0; font-size: .85rem; border-right: 1px solid #111; }
-.explorer h4 { margin: 0 0 .4rem; padding: 0 .9rem; font-size: .7rem; letter-spacing: .1em; color: #bbb; text-transform: uppercase; }
+.explorer .exp-titulo { margin: 0 0 .4rem; padding: 0 .9rem; font-size: .7rem; letter-spacing: .1em; color: #bbb; text-transform: uppercase; }
 .explorer ul { list-style: none; margin: 0; padding: 0; }
 .explorer .filho { padding-left: 1.2rem; }
 .arq {
@@ -291,7 +288,7 @@ code, pre { font-family: var(--fonte-mono); }
 .painel { background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra); padding: clamp(1.4rem, 4vw, 2.4rem); }
 .painel[hidden] { display: none; }
 .painel h3 { font-size: 1.7rem; color: var(--verde-700); }
-.analogia { background: var(--verde-100); border-left: 6px solid var(--amarelo); border-radius: 12px; padding: 1rem 1.2rem; font-size: 1.1rem; margin-bottom: 1.2rem; }
+.analogia { background: var(--verde-100); border-radius: 12px; padding: 1rem 1.2rem; font-size: 1.1rem; margin-bottom: 1.2rem; }
 .painel pre {
   background: #0d1f14; color: #e6f4e4; border-radius: 14px; padding: 1rem; overflow: auto;
   font-size: .85rem; line-height: 1.55; max-height: 320px; margin: 0 0 1rem;
