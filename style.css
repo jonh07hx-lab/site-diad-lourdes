@@ -150,6 +150,15 @@ code, pre { font-family: var(--fonte-mono); }
 .cartao h3 { font-size: 1.35rem; color: var(--verde-700); }
 .cartao p { margin: 0; color: var(--texto-suave); }
 
+/* matérias por trimestre (minimalista) */
+.grade-titulo { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 4rem 0 1.2rem; color: var(--verde-700); }
+.trimestres { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.trimestre { background: var(--verde-100); border-radius: var(--raio); padding: 1.6rem; }
+.trimestre h4 { margin: 0; font-size: 1.2rem; color: var(--verde-700); }
+.trimestre .foco { margin: .2rem 0 1rem; color: var(--texto-suave); font-size: .95rem; }
+.trimestre ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+.trimestre li { background: var(--branco); border-radius: 999px; padding: .4rem .95rem; font-weight: 600; font-size: .95rem; }
+
 /* contadores */
 .contadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
 .contador { background: var(--grad-verde); color: var(--branco); border-radius: var(--raio); padding: 1.8rem; text-align: center; box-shadow: var(--sombra); }
