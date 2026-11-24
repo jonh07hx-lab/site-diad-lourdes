@@ -112,7 +112,7 @@ code, pre { font-family: var(--fonte-mono); }
   display: grid; align-items: center; text-align: center;
   padding: 7rem 0 5rem; color: var(--branco);
   background:
-              linear-gradient(160deg, var(--verde-900), var(--verde-700));
+              linear-gradient(160deg, var(--verde-900), #0b5a26);
 }
 .hero-conteudo { position: relative; z-index: 2; }
 .logos { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
@@ -325,7 +325,7 @@ code, pre { font-family: var(--fonte-mono); }
 
 /* ---------- 14. RODAPÉ ---------- */
 .rodape {
-  background: linear-gradient(160deg, var(--verde-900), var(--verde-700)); color: var(--branco);
+  background: linear-gradient(160deg, var(--verde-900), #0b5a26); color: var(--branco);
   text-align: center; padding: clamp(4rem, 9vw, 7rem) 0 3rem;
 }
 .rodape h2 { font-size: clamp(2.2rem, 6vw, 4rem); }
