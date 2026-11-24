@@ -139,7 +139,7 @@ $$(".contador strong").forEach((el) => obsContador.observe(el));
   alvo.textContent = ""; ciclo();
 })();
 
-/* ---------- 7. ROLAGEM: progresso, menu ativo e indicador "3/9" ---------- */
+/* ---------- 7. ROLAGEM: progresso, menu ativo e menu transparente ---------- */
 const secoes = $$("[data-secao]");
 const links = $$("#menu a");
 let atual = 0, ticking = false;
@@ -158,8 +158,10 @@ function aoRolar() {
     });
     const menu = $("#menu");
     menu.scrollTo({ left: links[atual].offsetLeft - menu.clientWidth / 2, behavior: "auto" });
-    $("#indicador").textContent = `${atual + 1}/${secoes.length}`;
   }
+  // menu transparente sobre as seções escuras (hero e rodapé); claro sobre as outras
+  const sobreEscuro = $$(".escuro").some((e) => { const r = e.getBoundingClientRect(); return r.top <= 50 && r.bottom >= 50; });
+  $(".topo").classList.toggle("claro", !sobreEscuro);
   ticking = false;
 }
 addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(aoRolar); } }, { passive: true });
@@ -387,26 +389,41 @@ function rodarFluxo() {
 }
 $("#btn-fluxo").addEventListener("click", rodarFluxo);
 
-/* ---------- 13. MODO APRESENTAÇÃO ---------- */
-const btnAp = $("#btn-apresentacao");
-function alternarApresentacao(ligar) {
-  const on = ligar ?? !document.documentElement.classList.contains("apresentacao");
-  document.documentElement.classList.toggle("apresentacao", on);
-  btnAp.setAttribute("aria-pressed", on);
-  btnAp.textContent = on ? "✖ Sair" : "🎤 Apresentar";
-  setTimeout(() => secoes[atual].scrollIntoView(), 50); // mantém a seção atual na tela
-}
-btnAp.addEventListener("click", () => alternarApresentacao());
-function irPara(i) {
-  const alvo = Math.max(0, Math.min(secoes.length - 1, i));
-  secoes[alvo].scrollIntoView({ behavior: reduzir ? "auto" : "smooth" });
-}
-addEventListener("keydown", (e) => {
-  const ap = document.documentElement.classList.contains("apresentacao");
-  if (e.key === "Escape" && ap) return alternarApresentacao(false);
-  if (!ap || e.altKey || e.ctrlKey || e.metaKey) return;
-  // não rouba as setas de quem está digitando ou ajustando um controle
-  if (e.target.closest("textarea, input, select, [contenteditable]")) return;
-  if (e.key === "ArrowRight") { e.preventDefault(); irPara(atual + 1); }
-  if (e.key === "ArrowLeft") { e.preventDefault(); irPara(atual - 1); }
-});
+/* ---------- 13. HERO: símbolos de programação no fundo ---------- */
+(function simbolos() {
+  const caixa = $("#simbolos");
+  const lista = ["</>", "{ }", "( )", "[ ]", ";", "=>", "&&", "||", "//", "#", "01", "10", "<div>", "fn()", "if", "=", "!=", "++", "const", "$", "%", "*", "<>", "..", "0x", "return", "{ ; }", "</>"];
+  const cores = ["#ffffff", "#8bcb6a", "#f9b812", "#7fb4ff"];
+  // posições "espalhadas" calculadas com números fixos (sempre iguais, sem sorteio)
+  lista.forEach((txt, i) => {
+    const sim = document.createElement("div");
+    sim.className = "sim";
+    const x = (i * 37 + 7) % 96, y = (i * 53 + 11) % 92;
+    sim.style.cssText = `--x:${x}%;--y:${y}%;--p:${6 + (i % 5) * 5}`;
+    const sp = document.createElement("span");
+    sp.textContent = txt;
+    sp.style.cssText = `--s:${1.1 + (i % 4) * 0.7}rem;--c:${cores[i % cores.length]};--o:${0.14 + (i % 3) * 0.07};--d:${9 + (i % 6) * 2}s;--dl:-${(i * 1.7).toFixed(1)}s`;
+    sim.append(sp); caixa.append(sim);
+  });
+})();
+
+/* ---------- 14. HERO: o mouse move o fundo e inclina as logos em 3D ---------- */
+(function mouse3d() {
+  const hero = $("#hero");
+  if (reduzir || !matchMedia("(pointer: fine)").matches) return;
+  hero.addEventListener("pointermove", (e) => {
+    const r = hero.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - 0.5;   // -0,5 a 0,5
+    const ny = (e.clientY - r.top) / r.height - 0.5;
+    hero.style.setProperty("--mx", (nx * -2).toFixed(2)); // parallax dos símbolos
+    hero.style.setProperty("--my", (ny * -2).toFixed(2));
+    $$(".logo-3d", hero).forEach((l) => {                 // inclinação das logos
+      l.style.setProperty("--ry", (nx * 28).toFixed(1) + "deg");
+      l.style.setProperty("--rx", (ny * -28).toFixed(1) + "deg");
+    });
+  });
+  hero.addEventListener("pointerleave", () => {
+    hero.style.setProperty("--mx", 0); hero.style.setProperty("--my", 0);
+    $$(".logo-3d", hero).forEach((l) => { l.style.setProperty("--ry", "0deg"); l.style.setProperty("--rx", "0deg"); });
+  });
+})();

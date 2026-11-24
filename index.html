@@ -25,26 +25,22 @@
         <a href="#vscode">VS Code</a>
         <a href="#quiz">Quiz</a>
         <a href="#como">Como foi feito</a>
-        <a href="#projetos">Projetos</a>
         <a href="#matricula">Matrícula</a>
       </nav>
-      <button class="btn btn-pequeno btn-ap" id="btn-apresentacao" aria-pressed="false">🎤 Apresentar</button>
     </div>
   </header>
-  <div class="indicador" id="indicador" aria-live="polite">1/9</div>
 
   <main>
 
     <!-- ===== 1. HERO ===== -->
     <section id="hero" class="hero escuro" data-secao aria-labelledby="t-hero">
-      <div class="formas" aria-hidden="true">
-        <span class="forma f1"></span><span class="forma f2"></span><span class="forma f3"></span>
-        <span class="forma f4"></span><span class="forma f5"></span>
-      </div>
+      <!-- símbolos de programação flutuando no fundo (criados no script.js) -->
+      <div class="simbolos" id="simbolos" aria-hidden="true"></div>
       <div class="container hero-conteudo">
+        <!-- logos em 3D: .logo-3d inclina com o mouse, .logo-badge balança sozinha -->
         <div class="logos">
-          <div class="logo-badge"><img src="assets/logo-escola.jpg" alt="Logo da Unidade Escolar Profª Maria de Lourdes Rebêlo"></div>
-          <div class="logo-badge"><img src="assets/logo-seduc-pi.png" alt="Logo do Governo do Piauí – SEDUC-PI"></div>
+          <div class="logo-3d"><div class="logo-badge"><img src="assets/logo-escola.jpg" alt="Logo da Unidade Escolar Profª Maria de Lourdes Rebêlo"></div></div>
+          <div class="logo-3d"><div class="logo-badge atraso"><img src="assets/logo-seduc-pi.png" alt="Logo do Governo do Piauí – SEDUC-PI"></div></div>
         </div>
         <h1 id="t-hero">Desenvolvimento de Sistemas</h1>
         <p class="hero-digita" aria-live="off">Aprenda a criar <span id="digitando">sites</span><span class="cursor" aria-hidden="true"></span></p>
@@ -58,43 +54,47 @@
       <div class="container">
         <h2 id="t-curso" class="reveal" style="--i:1">O que o curso oferece</h2>
         <p class="lead reveal" style="--i:2">Sete coisas que você vai viver aqui, explicadas sem complicação.</p>
-        <div class="grade">
+        <!-- carrossel em formato de rosquinha: os 7 cartões ficam num anel 3D que gira devagar.
+             A posição de cada cartão vem de --i (0 a 6) no CSS. Passe o mouse para pausar. -->
+        <div class="anel-cena reveal">
+        <div class="anel">
           <!-- cada cartão é um <article>; o JS usa o primeiro como exemplo na aba HTML -->
-          <article class="cartao reveal" style="--i:0">
+          <article class="cartao" style="--i:0">
             <span class="emoji" aria-hidden="true">🧠</span>
             <h3>Lógica</h3>
             <p>Aprenda a pensar passo a passo, como quem ensina um robô a resolver problemas.</p>
           </article>
-          <article class="cartao reveal" style="--i:1">
+          <article class="cartao" style="--i:1">
             <span class="emoji" aria-hidden="true">🌐</span>
             <h3>Sites</h3>
             <p>Crie páginas bonitas que qualquer pessoa pode abrir no celular ou no computador.</p>
           </article>
-          <article class="cartao reveal" style="--i:2">
+          <article class="cartao" style="--i:2">
             <span class="emoji" aria-hidden="true">📱</span>
             <h3>Aplicativos</h3>
             <p>Transforme uma ideia em um app de verdade, como os que você usa todo dia.</p>
           </article>
-          <article class="cartao reveal" style="--i:3">
+          <article class="cartao" style="--i:3">
             <span class="emoji" aria-hidden="true">🗄️</span>
             <h3>Banco de dados</h3>
             <p>Descubra como apps guardam fotos, contas e pontuações sem perder nada.</p>
           </article>
-          <article class="cartao reveal" style="--i:4">
+          <article class="cartao" style="--i:4">
             <span class="emoji" aria-hidden="true">💼</span>
             <h3>Mercado de trabalho</h3>
             <p>Tecnologia é uma das áreas que mais precisam de gente nova e criativa.</p>
           </article>
-          <article class="cartao reveal" style="--i:5">
+          <article class="cartao" style="--i:5">
             <span class="emoji" aria-hidden="true">🚀</span>
             <h3>Projetos</h3>
             <p>Você aprende fazendo: em equipe, criando coisas para mostrar para todo mundo.</p>
           </article>
-          <article class="cartao reveal" style="--i:6">
+          <article class="cartao" style="--i:6">
             <span class="emoji" aria-hidden="true">🤝</span>
             <h3>Estágio</h3>
             <p>Uma chance de viver a rotina de uma empresa e ganhar experiência de verdade.</p>
           </article>
+        </div>
         </div>
         <!-- matérias do curso (2º ano), resumo do planejamento trimestral -->
         <h3 class="grade-titulo reveal">Matérias do 2º ano</h3>
@@ -343,7 +343,7 @@ git push</code></pre>
           <span class="chip">VS Code escreve</span><span class="seta" aria-hidden="true">→</span>
           <span class="chip">navegador executa</span><span class="seta" aria-hidden="true">→</span>
           <span class="chip">GitHub guarda</span><span class="seta" aria-hidden="true">→</span>
-          <span class="chip">Vercel publica</span>
+          <span class="chip">GitHub Pages publica</span>
         </div>
       </div>
     </section>
@@ -428,13 +428,13 @@ git push</code></pre>
         <!-- aba No ar -->
         <div class="painel" role="tabpanel" id="p-ar" aria-labelledby="tab-ar" hidden>
           <h3>No ar: do código ao link</h3>
-          <p class="analogia">🍕 É como uma pizzaria: a cozinha faz, o motoboy entrega e o cliente recebe em casa.</p>
+          <p class="analogia">🍕 É como uma pizzaria: a cozinha faz, o estoque guarda a receita e o motoboy entrega em casa.</p>
           <div class="fluxo" id="fluxo">
             <div class="passo" style="--i:0"><span class="emoji" aria-hidden="true">💻</span>Código</div>
             <span class="fluxo-seta" style="--i:1" aria-hidden="true">→</span>
             <div class="passo" style="--i:1"><span class="emoji" aria-hidden="true">🐙</span>GitHub</div>
             <span class="fluxo-seta" style="--i:2" aria-hidden="true">→</span>
-            <div class="passo" style="--i:2"><span class="emoji" aria-hidden="true">▲</span>Vercel</div>
+            <div class="passo" style="--i:2"><span class="emoji" aria-hidden="true">🌍</span>GitHub Pages</div>
             <span class="fluxo-seta" style="--i:3" aria-hidden="true">→</span>
             <div class="passo" style="--i:3"><span class="emoji" aria-hidden="true">🔗</span>Link</div>
           </div>
@@ -443,19 +443,6 @@ git push</code></pre>
       </div>
     </section>
 
-    <!-- ===== 8. PROJETOS DOS ALUNOS ===== -->
-    <section id="projetos" class="secao" data-secao aria-labelledby="t-proj">
-      <div class="container">
-        <h2 id="t-proj" class="reveal" style="--i:1">Projetos dos alunos</h2>
-        <div class="grade">
-          <!-- contenteditable: clique no texto e escreva por cima! -->
-          <article class="cartao projeto reveal" style="--i:0"><div class="capa" aria-hidden="true">🎮</div><div class="corpo"><h3 contenteditable="true" spellcheck="false">Nome do projeto 1</h3><p contenteditable="true" spellcheck="false">Clique aqui e descreva o projeto: o que ele faz e quem criou.</p></div></article>
-          <article class="cartao projeto reveal" style="--i:1"><div class="capa" aria-hidden="true">📱</div><div class="corpo"><h3 contenteditable="true" spellcheck="false">Nome do projeto 2</h3><p contenteditable="true" spellcheck="false">Clique aqui e descreva o projeto: o que ele faz e quem criou.</p></div></article>
-          <article class="cartao projeto reveal" style="--i:2"><div class="capa" aria-hidden="true">🌐</div><div class="corpo"><h3 contenteditable="true" spellcheck="false">Nome do projeto 3</h3><p contenteditable="true" spellcheck="false">Clique aqui e descreva o projeto: o que ele faz e quem criou.</p></div></article>
-        </div>
-        <p class="nota-edit extra">Dica: os títulos e textos acima são editáveis direto na página (a edição some ao recarregar). Para salvar de vez, altere o HTML.</p>
-      </div>
-    </section>
 
   </main>
 

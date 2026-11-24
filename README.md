@@ -5,6 +5,5 @@ Site de apresentação do curso, feito por alunos da Unidade Escolar Profª Mari
 - **Tecnologias:** HTML, CSS e JavaScript puros. Sem frameworks, sem npm, sem CDN (funciona offline).
 - **Arquivos:** `index.html` (estrutura), `style.css` (visual e animações), `script.js` (lógica), `assets/` (logos).
 - **Como abrir:** abra a pasta no VS Code e use a extensão *Live Server* (ou dê dois cliques no `index.html`).
-- **Modo apresentação:** botão "Apresentar" no menu; setas ← → pulam entre as seções, Esc sai.
-- **Publicação:** Vercel, framework "Other", sem build.
+- **Publicação:** GitHub Pages (Settings → Pages → branch main, pasta raiz). Sem build.
 - **Roteiro dos alunos:** veja `ROTEIRO-ALUNOS.md`.
